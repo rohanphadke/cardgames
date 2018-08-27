@@ -1,11 +1,13 @@
-#ifndef __CARD__
 #define __CARD__
+
+#ifndef __SUIT__
+#include "suit.h"
 #endif
 
 class Card{
 
 int value;
-int suite;
+int suit;
 
 public:
 	Card(int val,int sui);
@@ -17,7 +19,7 @@ public:
 
 Card::Card(int val,int sui){
 	value = val;
-	suite = sui;
+	suit = sui;
 }
 
 Card::~Card(){
@@ -32,9 +34,9 @@ void Card::setValue(int val){
 }
 
 int Card::getSuite(){
-	return suite;
+	return suit;
 }
 
 void Card::setSuite(int sui){
-	suite = sui;
+	suit = sui;
 }
