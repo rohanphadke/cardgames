@@ -23,8 +23,10 @@ public:
 
 Deck::Deck(bool joker){
 	includeJoker = joker;
-	cardList.push_back(Card(0,JOKER));
-	cardList.push_back(Card(0,JOKER));
+	if(includeJoker){
+		cardList.push_back(Card(0,JOKER));
+		cardList.push_back(Card(0,JOKER));
+	}
 	for(auto suit:suitList){
 		for(int c=1;c<=CARDS_IN_A_SUIT;c++){
 			cardList.push_back(Card(c,suit));
