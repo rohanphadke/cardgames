@@ -5,6 +5,11 @@
 #include <vector>
 #endif
 
+#ifndef ALGORITHM
+#define ALGORITHM
+#include <algorithm>
+#endif
+
 #ifndef __CARD__
 #include "card.h"
 #endif
@@ -12,35 +17,38 @@
 class Deck{
 
 bool includeJoker;
-vector<Card> cardsInDeck;
+std::vector<Card> cardsInDeck;
 
 public:
 	Deck(bool joker);
-	vector<Card> getCardsInDeck();
-	void setCardsInDeck()
-	Deck shuffle(Deck d);
+	std::vector<Card> getCardsInDeck();
+	void setCardsInDeck(std::vector<Card> cardList);
+	void shuffle();
 };
 
 Deck::Deck(bool joker){
 	includeJoker = joker;
 	if(includeJoker){
-		cardList.push_back(Card(0,JOKER));
-		cardList.push_back(Card(0,JOKER));
+		cardsInDeck.push_back(Card(0,JOKER));
+		cardsInDeck.push_back(Card(0,JOKER));
 	}
-	for(auto suit:suitList){
+	for(int suit=1;suit<=4;suit++){
 		for(int c=1;c<=CARDS_IN_A_SUIT;c++){
-			cardList.push_back(Card(c,suit));
+			cardsInDeck.push_back(Card(c,suit));
 		}
 	}
 }
 
-vector<Card> Deck::getCardsInDeck(){
+std::vector<Card> Deck::getCardsInDeck(){
 	return cardsInDeck;
 }
 
-Deck Deck::shuffle(Deck deck){
-	vector<Card> cardList = deck.getCardsInDeck();
+void Deck::setCardsInDeck(std::vector<Card> cardList){
+	cardsInDeck=cardList;
+}
+
+void Deck::shuffle(){
+	std::vector<Card> cardList = Deck::getCardsInDeck();
 	std::random_shuffle(cardList.begin(),cardList.end());
-	deck.setCardsInDeck(cardList);
-	return deck;
+	Deck::setCardsInDeck(cardList);
 }
